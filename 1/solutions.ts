@@ -22,25 +22,19 @@ console.log("first solution", firstSolution(input));
 function secondSolution(input: string) {
   let inputArr = input.split("\n");
 
-  let threeBiggest = [0, 0, 0];
-  let elfLoad = 0;
+  let threeBiggestLoads = [0, 0, 0];
+  let newLoad = 0;
 
   for (let digits of inputArr) {
     if (digits !== "") {
-      elfLoad += +digits;
+      newLoad += +digits;
     } else {
-      let smallestOf3 = Math.min(...threeBiggest);
-      if (elfLoad > smallestOf3) {
-        threeBiggest.splice(
-          threeBiggest.findIndex((item) => item === smallestOf3),
-          1,
-          elfLoad
-        );
-      }
-      elfLoad = 0;
+      threeBiggestLoads.push(newLoad);
+      threeBiggestLoads.sort((a, b) => a - b).shift();
+      newLoad = 0;
     }
   }
-  return threeBiggest.reduce((acc, curr) => (acc += curr));
+  return threeBiggestLoads.reduce((acc, curr) => (acc += curr));
 }
 
 console.log("second solution", secondSolution(input));
