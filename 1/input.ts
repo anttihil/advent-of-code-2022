@@ -1,4 +1,4 @@
-const input = `5324
+export const input = `5324
 5176
 2197
 2701
@@ -2254,46 +2254,3 @@ const input = `5324
 1457
 4469
 `;
-
-function firstSolution(input) {
-  let inputArr = input.split("\n");
-
-  let max = 0;
-  let elfLoad = 0;
-
-  for (let digits of inputArr) {
-    if (digits !== "") {
-      elfLoad += +digits;
-    } else {
-      max = Math.max(elfLoad, max);
-      elfLoad = 0;
-    }
-  }
-  return max;
-}
-
-function secondSolution(input) {
-  let inputArr = input.split("\n");
-
-  let threeBiggest = [0, 0, 0];
-  let elfLoad = 0;
-
-  for (let digits of inputArr) {
-    if (digits !== "") {
-      elfLoad += +digits;
-    } else {
-      let smallestOf3 = Math.min(...threeBiggest);
-      if (elfLoad > smallestOf3) {
-        threeBiggest.splice(
-          threeBiggest.findIndex((item) => item === smallestOf3),
-          1,
-          elfLoad
-        );
-      }
-      elfLoad = 0;
-    }
-  }
-  return threeBiggest.reduce((acc, curr) => (acc += curr));
-}
-
-console.log(secondSolution(input));
